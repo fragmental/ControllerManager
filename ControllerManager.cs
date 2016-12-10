@@ -10,26 +10,36 @@ public class ControllerManager{
         LIN
     };
 
-	public static ControllerManager Instance {
-		get {
-			if (i == null) {
+	public static ControllerManager Instance 
+	{
+		get 
+		{
+			if (i == null) 
+			{
 				i = new ControllerManager ();
 				if (Application.platform == RuntimePlatform.OSXEditor
-					|| Application.platform == RuntimePlatform.OSXPlayer) {
-					i.OS = OSX;
-				} else  if (Application.platform == RuntimePlatform.WindowsEditor
-					|| Application.platform == RuntimePlatform.WindowsPlayer){
-					i.OS = WIN;
-				} else  if (Application.platform == RuntimePlatform.LinuxPlayer{
-					i.OS = LIN;
-				} else {
+					|| Application.platform == RuntimePlatform.OSXPlayer) 
+				{
+					i.os = OS.OSX;
+				} 
+				else  if (Application.platform == RuntimePlatform.WindowsEditor
+					|| Application.platform == RuntimePlatform.WindowsPlayer)
+				{
+					i.os = OS.WIN;
+				} 
+				else  if (Application.platform == RuntimePlatform.LinuxPlayer)
+				{
+					i.os = OS.LIN;
+				} 
+				else 
+				{
 					throw new Exception(); // Unsupported platform
 				}
 			}
 			return i;
 		}
 	}
-
+	private OS os;
 	private static ControllerManager i;
 
 
@@ -54,17 +64,23 @@ public class ControllerManager{
 
 	public float GetRightJoystickX(int player)
 	{
-		if (osx) {
+		if (os == OS.OSX) 
+		{
 			return Input.GetAxis("3rd-axis" + player);
-		} else {
+		} 
+		else 
+		{
 			return Input.GetAxis("4th-axis" + player);
 		}
 	}
 	public float GetRightJoystickY(int player)
 	{
-		if (osx) {
+		if (os == OS.OSX) 
+		{
 			return Input.GetAxis("4th-axis" + player);
-		} else {
+		} 
+		else 
+		{
 			return Input.GetAxis("5th-axis" + player);
 		}
 	}
@@ -76,11 +92,14 @@ public class ControllerManager{
 	/// <param name="player">Player number ( 1 or 2 )</param>
 	public float GetRightTrigger(int player)
 	{
-		if (osx) {
+		if (os == OS.OSX) 
+		{
 			// Convert -1 - 1 range to 0 - 1 range
 			float value = Input.GetAxis ("6th-axis" + player);
 			return convertRange(-1f, 1f, 0f, 1f, value);
-		} else {
+		} 
+		else 
+		{
 			return Input.GetAxis ("10th-axis" + player);
         }
 
@@ -88,22 +107,27 @@ public class ControllerManager{
 
     public float GetLeftTrigger(int player)
     {
-        if (osx) {
+        if (os == OS.OSX) 
+        {
             return Input.GetAxis("5th-axis" + player);
-        } else {
+        } 
+        else 
+        {
             return Input.GetAxis("9th-axis" + player);
         }
     }
 
 	public bool GetRightBumper(int player)
 	{
-		if (osx)
+		if (os == OS.OSX)
 		{
 			if (player == 1)
 				return Input.GetKeyDown(KeyCode.Joystick1Button14);
 			else
 				return Input.GetKeyDown(KeyCode.Joystick2Button14);
-		} else {
+		} 
+		else 
+		{
 			if (player == 1)
 				return Input.GetKeyDown(KeyCode.Joystick1Button5);
 			else 
@@ -113,7 +137,7 @@ public class ControllerManager{
 
     public bool GetLeftBumper(int player)
     {
-        if (osx)
+        if (os == OS.OSX)
         {
             if (player == 1)
 				return Input.GetKeyDown(KeyCode.Joystick1Button13);
@@ -129,13 +153,17 @@ public class ControllerManager{
         }
     }
 
-	public bool GetXButton(int player){
-		if (osx) {
+	public bool GetXButton(int player)
+	{
+		if (os == OS.OSX) 
+		{
 			if (player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button18);
 			else
 				return Input.GetKeyDown (KeyCode.Joystick2Button18);
-		} else {
+		} 
+		else 
+		{
 			if(player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button2);
 			else
@@ -143,13 +171,17 @@ public class ControllerManager{
 		}
 	}
 
-	public bool GetAButton(int player){
-		if (osx) {
+	public bool GetAButton(int player)
+	{
+		if (os == OS.OSX) 
+		{
 			if (player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button16);
 			else
 				return Input.GetKeyDown (KeyCode.Joystick2Button16);
-		} else {
+		} 
+		else 
+		{
 			if(player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button0);
 			else
@@ -159,7 +191,7 @@ public class ControllerManager{
 
     public bool GetStartButton(int player)
     {
-        if (osx)
+        if (os == OS.OSX)
         {
             if (player == 1)
                 return Input.GetKeyDown(KeyCode.Joystick1Button9);
@@ -177,12 +209,14 @@ public class ControllerManager{
     }
 
 	public bool GetBButton(int player){
-		if (osx) {
+		if (os == OS.OSX) 
+		{
 			if (player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button17);
 			else
 				return Input.GetKeyDown (KeyCode.Joystick2Button17);
-		} else {
+		} else 
+		{
 			if(player == 1)
 				return Input.GetKeyDown (KeyCode.Joystick1Button1);
 			else
@@ -191,7 +225,8 @@ public class ControllerManager{
 	}
 	private float convertRange(float originalStart, float originalEnd,
     						   float newStart, float newEnd,
-    						   float value){
+    						   float value)
+	{
 
 	    float scale = (newEnd - newStart) / (originalEnd - originalStart);
 	    return (newStart + ((value - originalStart) * scale));
