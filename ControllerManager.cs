@@ -41,6 +41,7 @@ public class ControllerManager{
     }
     private OS os;
     private static ControllerManager i;
+	private bool osxTriggerInit = false;
 
 
     /// <summary>
@@ -96,6 +97,10 @@ public class ControllerManager{
         {
             // Convert -1 - 1 range to 0 - 1 range
             float value = Input.GetAxis ("6th-axis" + player);
+			if(value == 0 && !i.osxTriggerInit)
+				return 0;
+			else 
+				i.osxTriggerInit = true;
             return convertRange(-1f, 1f, 0f, 1f, value);
         } 
         else 
