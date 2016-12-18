@@ -359,6 +359,42 @@ public class ControllerManager{
 		}
 	}
 
+	public bool GetRightJoystickClick(int player)
+	{
+		if (os == OS.OSX)
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button12);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button12);
+		}
+		else
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button9);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button9);
+		}
+	}
+
+	public bool GetLeftJoystickClick(int player)
+	{
+		if (os == OS.OSX)
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button11);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button11);
+		}
+		else
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button8);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button8);
+		}
+	}
+
     private float convertRange(float originalStart, float originalEnd,
                                float newStart, float newEnd,
                                float value)
