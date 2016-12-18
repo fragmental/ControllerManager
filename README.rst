@@ -5,12 +5,17 @@ ControllerManager is a cross platform multiplayer controller manager for Unity. 
 
 Currently works for two xboxs controllers.
 
-Unity input manager must include the axes as specified in the InputManager.asset file. 
 
 Use
 ===
 
-Simply inlcude the ControllerManager in your Unity project and accesss it via its static singleton instance. i.e. ControllerManager.Instance.GetRightTrigger(player2);
+Simply inlcude the ControllerManager in your Unity project and accesss it via its static singleton instance. 
+
+i.e. 
+
+bool b_button_pressed = ControllerManager.Instance.GetAButton(player2);
+
+Unity input manager must include the axes as specified in the InputManager.asset file. 
 
 
 CURRENT STATUS
