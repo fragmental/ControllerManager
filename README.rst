@@ -11,3 +11,9 @@ Use
 ===
 
 Simply inlcude the ControllerManager in your Unity project and accesss it via its static singleton instance. i.e. ControllerManager.Instance.GetRightTrigger(player2);
+
+
+CURRENT STATUS
+==============
+
+Fully tested on mac with 2 controllers. 
