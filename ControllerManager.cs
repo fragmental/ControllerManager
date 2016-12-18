@@ -33,7 +33,7 @@ public class ControllerManager{
                 } 
                 else 
                 {
-                    throw new Exception(); // Unsupported platform
+					throw new UnityException ("Unsupported Platform"); // Unsupported platform
                 }
             }
             return i;
@@ -47,7 +47,7 @@ public class ControllerManager{
     /// Gets the left joystick x axis.
     /// </summary>
     /// <returns>The axis value for the x axis. -1 to 1</returns>
-    /// <param name="player">Player number ( 1 or 2 )</param>
+    /// <param name="player">Player number </param>
     public float GetLeftJoystickX(int player)
     {
         return Input.GetAxis("x-axis" + player);
@@ -56,7 +56,7 @@ public class ControllerManager{
     /// Gets the left joystick y axis.
     /// </summary>
     /// <returns>The axis value for the y axis. -1 to 1</returns>
-    /// <param name="player">Player number ( 1 or 2 )</param>
+    /// <param name="player">Player number </param>
     public float GetLeftJoystickY(int player)
     {
         return Input.GetAxis("y-axis" + player);
@@ -89,7 +89,7 @@ public class ControllerManager{
     /// Gets the right trigger axis as a value from 0 (not engaged) to 1 (fully engaged).
     /// </summary>
     /// <returns>The axis value for the right trigger axis. 0 ro 1</returns>
-    /// <param name="player">Player number ( 1 or 2 )</param>
+    /// <param name="player">Player number </param>
     public float GetRightTrigger(int player)
     {
         if (os == OS.OSX) 
@@ -105,6 +105,11 @@ public class ControllerManager{
 
     }
 
+	/// <summary>
+	/// Gets the Left trigger axis as a value from 0 (not engaged) to 1 (fully engaged).
+	/// </summary>
+	/// <returns>The axis value for the Left trigger axis. 0 ro 1</returns>
+	/// <param name="player">Player number </param>
     public float GetLeftTrigger(int player)
     {
         if (os == OS.OSX) 
@@ -189,6 +194,40 @@ public class ControllerManager{
         }
     }
 
+	public bool GetYButton(int player)
+	{
+		if (os == OS.OSX) 
+		{
+			if (player == 1)
+				return Input.GetKeyDown (KeyCode.Joystick1Button19);
+			else
+				return Input.GetKeyDown (KeyCode.Joystick2Button19);
+		} 
+		else 
+		{
+			if(player == 1)
+				return Input.GetKeyDown (KeyCode.Joystick1Button3);
+			else
+				return Input.GetKeyDown (KeyCode.Joystick2Button3);
+		}
+	}
+
+	public bool GetBButton(int player){
+		if (os == OS.OSX) 
+		{
+			if (player == 1)
+				return Input.GetKeyDown (KeyCode.Joystick1Button17);
+			else
+				return Input.GetKeyDown (KeyCode.Joystick2Button17);
+		} else 
+		{
+			if(player == 1)
+				return Input.GetKeyDown (KeyCode.Joystick1Button1);
+			else
+				return Input.GetKeyDown (KeyCode.Joystick2Button1);
+		}
+	}
+
     public bool GetStartButton(int player)
     {
         if (os == OS.OSX)
@@ -207,22 +246,114 @@ public class ControllerManager{
         }
 
     }
+		
+	public bool GetBackButton(int player)
+	{
+		if (os == OS.OSX)
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button10);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button10);
+		}
+		else
+		{
+			if (player == 1)
+				return Input.GetKeyDown(KeyCode.Joystick1Button6);
+			else
+				return Input.GetKeyDown(KeyCode.Joystick2Button6);
+		}
 
-    public bool GetBButton(int player){
-        if (os == OS.OSX) 
-        {
-            if (player == 1)
-                return Input.GetKeyDown (KeyCode.Joystick1Button17);
-            else
-                return Input.GetKeyDown (KeyCode.Joystick2Button17);
-        } else 
-        {
-            if(player == 1)
-                return Input.GetKeyDown (KeyCode.Joystick1Button1);
-            else
-                return Input.GetKeyDown (KeyCode.Joystick2Button1);
-        }
-    }
+	}
+
+	public bool GetDPadUp(int player)
+	{
+		if (os == OS.OSX) 
+		{
+			if (player == 1) 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick1Button5);
+			} 
+			else 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick2Button5);
+			}
+		}
+		else
+		{
+			if(Input.GetAxis("7th-axis" + player) > 0.5f)
+				return true;
+			else 
+				return false;
+		}
+	}
+
+	public bool GetDPadDown(int player)
+	{
+		if (os == OS.OSX) 
+		{
+			if (player == 1) 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick1Button6);
+			} 
+			else 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick2Button6);
+			}
+		}
+		else
+		{
+			if(Input.GetAxis("7th-axis" + player) < -0.5f)
+				return true;
+			else 
+				return false;
+		}
+	}
+
+	public bool GetDPadLeft(int player)
+	{
+		if (os == OS.OSX) 
+		{
+			if (player == 1) 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick1Button7);
+			} 
+			else 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick2Button7);
+			}
+		}
+		else
+		{
+			if(Input.GetAxis("6th-axis" + player) <-0.5f)
+				return true;
+			else 
+				return false;
+		}
+	}
+
+	public bool GetDPadRight(int player)
+	{
+		if (os == OS.OSX) 
+		{
+			if (player == 1) 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick1Button8);
+			} 
+			else 
+			{
+				return Input.GetKeyDown (KeyCode.Joystick2Button8);
+			}
+		}
+		else
+		{
+			if(Input.GetAxis("6th-axis" + player) > 0.5f)
+				return true;
+			else 
+				return false;
+		}
+	}
+
     private float convertRange(float originalStart, float originalEnd,
                                float newStart, float newEnd,
                                float value)
